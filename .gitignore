@@ -10,7 +10,8 @@
 
 # production
 /build
-/13. react_memo/node_modules
+/13. react_memo
+/14. useReducer/node_modules
 
 # misc
 .DS_Store
