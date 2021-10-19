@@ -1,16 +1,19 @@
-import react, { useEffect } from "react";
+import react, { useEffect, useContext } from "react";
+import { UserDispatch } from "./App.js";
 
-function UserList({ users, onToggle, onDelete }) {
+function UserList({ users }) {
     return (
         <div>
             {users.map((user) => {
-                return <UserInfo user={user} onToggle={onToggle} onDelete={onDelete} />;
+                return <UserInfo user={user} />;
             })}
         </div>
     );
 }
 
-function UserInfo({ user, onToggle, onDelete }) {
+function UserInfo({ user }) {
+    const dispatch = useContext(UserDispatch);
+
     useEffect(() => {
         console.log("user 값이 설정됨");
         console.log(user);
@@ -28,7 +31,10 @@ function UserInfo({ user, onToggle, onDelete }) {
                         backgroundColor: user.active ? "tomato" : "white",
                     }}
                     onClick={() => {
-                        return onToggle(user.id);
+                        return dispatch({
+                            type: "TOGGLE_USER",
+                            userId: user.id,
+                        });
                     }}
                 >
                     {user.id}
@@ -36,7 +42,10 @@ function UserInfo({ user, onToggle, onDelete }) {
                 {user.name} {user.email}{" "}
                 <button
                     onClick={() => {
-                        return onDelete(user.id);
+                        return dispatch({
+                            type: "DELETE_USER",
+                            userId: user.id,
+                        });
                     }}
                 >
                     삭제

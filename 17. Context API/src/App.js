@@ -4,6 +4,8 @@ import UserList from "./UserList.js";
 import CreateUser from "./CreateUser";
 import useInput from "./hooks/useInput";
 
+export const UserDispatch = react.createContext(null);
+
 function App() {
     const nextIndex = useRef(4);
 
@@ -60,32 +62,12 @@ function App() {
         reset();
     }, [users, name, email]);
 
-    const onToggle = useCallback(
-        (userId) => {
-            dispatch({
-                type: "TOGGLE_USER",
-                userId,
-                form,
-            });
-        },
-        [users]
-    );
-
-    const onDelete = useCallback(
-        (userId) => {
-            dispatch({
-                type: "DELETE_USER",
-                userId,
-                form,
-            });
-        },
-        [users]
-    );
-
     return (
         <div>
-            <CreateUser name={name} email={email} onChange={onChange} onClick={onClick} />
-            <UserList users={users} onToggle={onToggle} onDelete={onDelete} />
+            <UserDispatch.Provider value={dispatch}>
+                <CreateUser name={name} email={email} onChange={onChange} onClick={onClick} />
+                <UserList users={users} />
+            </UserDispatch.Provider>
             <div>활성화된 사용자 수 : 0</div>
         </div>
     );
