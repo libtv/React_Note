@@ -12,7 +12,8 @@
 /build
 /13. react_memo
 /14. useReducer
-/15. useReducer_Exam/node_modules
+/15. useReducer_Exam
+/16. customHook/node_modules
 
 # misc
 .DS_Store
