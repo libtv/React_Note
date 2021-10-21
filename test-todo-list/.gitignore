@@ -10,14 +10,6 @@
 
 # production
 /build
-/13. react_memo
-/14. useReducer
-/15. useReducer_Exam
-/16. customHook
-/17. Context API
-/18. styled-components
-/todolist/node_modules
-/test-todo-list/node_modules
 
 # misc
 .DS_Store
