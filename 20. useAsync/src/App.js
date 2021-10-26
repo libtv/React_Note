@@ -1,16 +1,12 @@
 import axios from "axios";
 import React, { useCallback, useEffect, useReducer } from "react";
 import styled, { css } from "styled-components";
+import useAsync from "./useAsync";
 
 const MyList = styled.h3`
     color: red;
     font-size: 15px;
 `;
-
-const initialState = {
-    loading: true,
-    data: null,
-};
 
 const MyButton = styled.button`
     font-size: 20px;
@@ -40,28 +36,20 @@ function reducer(state, action) {
     }
 }
 
+const myFunction = () => axios.get("https://jsonplaceholder.typicode.com/users");
+
 function App() {
-    const [state, dispatch] = useReducer(reducer, initialState);
+    const [state, dispatch] = useAsync(myFunction, []);
     const { loading, data } = state;
 
-    useEffect(async () => {
-        const response = await axios.get("https://jsonplaceholder.typicode.com/users");
-        dispatch({
-            type: "RENDER",
-            data: response.data,
-        });
-    }, [loading]);
-
-    const onClick = useCallback(() => {
-        dispatch({
-            type: "LOADING",
-        });
-    });
+    const onClick = () => {
+        return dispatch();
+    };
 
     return (
         <div className="App">
             <>
-                {loading
+                {loading || data == null
                     ? "로딩중입니다."
                     : data.map((list) => {
                           return (
