@@ -1,43 +1,36 @@
-//* action type */
-const ADD_TODO = "todos/ADD_TODO";
-const TOGGLE_TODO = "todos/TOGGLE_TODO";
+//* initialize Variable */
+const initializeState = [];
+let nextId = 0;
 
-//* craete action */
-let nextId = 1;
-export function addTodo(text) {
+//* action type */
+const ADD_LIST = "ADD_LIST";
+const TOGGLE_LIST = "TOGGLE_LIST";
+
+//* craete action *//
+export function addList(text) {
     return {
-        type: ADD_TODO,
+        type: ADD_LIST,
         todo: {
             id: nextId++,
-            text,
+            text: text,
         },
     };
 }
 
-export function toggleTodo(id) {
+export function toggleList(id) {
     return {
-        type: TOGGLE_TODO,
+        type: TOGGLE_LIST,
         id,
     };
 }
 
-//* initState */
-const initializeState = [];
-
-//* craete reducer */
-export default function todos(state = initializeState, action) {
+//* create Reducer */
+export default function todoReducer(state = initializeState, action) {
     switch (action.type) {
-        case ADD_TODO:
+        case ADD_LIST:
             return state.concat(action.todo);
-
-        case TOGGLE_TODO:
-            return state.map((todo) => {
-                if (todo.id === action.id) {
-                    return { ...todo, done: state.todo.done ? !state.todo.done : true };
-                } else {
-                    return todo;
-                }
-            });
+        case TOGGLE_LIST:
+            return;
         default:
             return state;
     }

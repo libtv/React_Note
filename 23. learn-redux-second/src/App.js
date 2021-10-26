@@ -1,14 +1,14 @@
 import logo from "./logo.svg";
 import "./App.css";
-import CounterContainer from "./container/CounterContainer";
-import TodosContainers from "./container/TodosContainer";
+import TodoContainer from "./container/TodoContainer";
 
 function App() {
     return (
-        <div className="App">
-            <CounterContainer></CounterContainer>
-            <TodosContainers></TodosContainers>
-        </div>
+        <>
+            <div className="App">
+                <TodoContainer />
+            </div>
+        </>
     );
 }
 

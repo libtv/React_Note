@@ -10,20 +10,6 @@
 
 # production
 /build
-/13. react_memo
-/14. useReducer
-/15. useReducer_Exam
-/16. customHook
-/17. Context API
-/18. styled-components
-/todolist
-/test-todo-list
-/19. api-integrate
-/20. useAsync
-/21. context API with api
-/22. learn-redux
-/23. learn-redux-second
-/24. react-redux/node_modules
 
 # misc
 .DS_Store
