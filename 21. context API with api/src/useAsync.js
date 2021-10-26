@@ -1,48 +1,28 @@
-import { useEffect, useReducer } from "react";
+import { useEffect } from "react";
+import { useUserDispatch, useUserState } from "./UserContextProvider";
 
-function reducer(state, action) {
-    switch (action.type) {
-        case "LOADING":
-            return {
-                ...state,
-                loading: true,
-            };
+function useAsync(callback) {
+    const myDispatch = useUserDispatch();
+    const myState = useUserState();
 
-        case "RENDER":
-            return {
-                ...state,
-                loading: false,
-                data: action.data,
-            };
-    }
-}
-
-const initialState = {
-    loading: true,
-    data: null,
-};
-
-function useAsync(callback, deps) {
-    const [variable, setVariable] = useReducer(reducer, initialState);
-
-    const MyFunc = async () => {
-        setVariable({
+    const AsyncDispatch = async () => {
+        myDispatch({
             type: "LOADING",
         });
 
         const response = await callback();
 
-        setVariable({
+        myDispatch({
             type: "RENDER",
             data: response.data,
         });
     };
 
     useEffect(() => {
-        MyFunc();
-    }, deps);
+        AsyncDispatch();
+    }, []);
 
-    return [variable, MyFunc];
+    return [myState, AsyncDispatch];
 }
 
 export default useAsync;
