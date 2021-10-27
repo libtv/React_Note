@@ -15,6 +15,22 @@ export function decrease() {
     };
 }
 
+export function asyncIncrease() {
+    return function (dispatch, getState) {
+        setTimeout(() => {
+            dispatch(increase());
+        }, 1000);
+    };
+}
+
+export function asyncDecrease() {
+    return function (dispatch, getState) {
+        setTimeout(() => {
+            dispatch(decrease());
+        }, 1000);
+    };
+}
+
 //* initialize variable0 */
 const initializeState = 0;
 
